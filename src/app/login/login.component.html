@@ -1,0 +1,25 @@
+<div class="login-tab">
+  <form [formGroup]="form" (submit)="login()">
+    <div class="input-control">
+      <mat-form-field hideRequiredMarker>
+        <input matInput appAutofill required formControlName="login" placeholder="Логин" (input)="clearErrorMsg()"/>
+        <mat-error *ngIf="form.get('login').hasError('required')">
+          Поле обязательно для заполнения
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="input-control">
+      <mat-form-field hideRequiredMarker>
+        <input matInput #password appAutofill required type="password" formControlName="password" placeholder="Пароль" />
+        <i matSuffix (click)="password.type = password.type === 'password' ? 'text' : 'password'"
+          class="icon-activatable" [class.icon-view]="password.type === 'password'"
+          [class.icon-hide]="password.type !== 'password'">
+        </i>
+        <mat-error *ngIf="form.get('password').hasError('required')">
+          Поле обязательно для заполнения
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button class="btn btn-primary btn-large login-button" [disabled]="form.invalid">Войти</button>
+  </form>
+</div>

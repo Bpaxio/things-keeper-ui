@@ -1,0 +1,70 @@
+@import "variables_main";
+
+.container, .header-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-container {
+    height: 86px;
+    display: flex !important;
+    padding-left: 50px;
+    padding-right: 50px;
+    max-width: 1630px;
+    // position: fixed;
+    -webkit-transform: translateY(0) translateZ(0);
+    transform: translateY(0) translateZ(0);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05);
+}
+
+.toolbar {
+    background-color: $white;
+}
+
+.header-navigation {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    display: flex !important;
+}
+
+.middle-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.middle-nav-link-cont {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.middle-nav-link {
+    letter-spacing: 1.22px;
+    display: block;
+    padding: 35px 25px;
+
+    :hover {
+        font-weight: 700;
+    }
+}
+
+.main-container {
+    position: relative;
+    z-index: 2;
+    padding: 120px 0;
+    display: block;
+    width: 100%;
+}
+
+.container {
+    margin-left: 100px;
+    margin-right: 100px;
+    max-width: 1630px;
+}
