@@ -1,0 +1,17 @@
+<ul class="grid-row">
+  <li *ngFor="let note of notes$|async" class="grid-col">
+   <div class="item">
+     <div class="item-inner">
+       <div class="item-header">
+         {{note.title}}
+       </div>
+       <div class="item-body">
+         {{note.description}}
+       </div>
+       <div class="item-bottom">
+          {{note.tags}}
+        </div>
+     </div>
+   </div>
+  </li>
+ </ul>
