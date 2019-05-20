@@ -2,6 +2,7 @@ import { NoteControllerService } from './../../api/service/api/noteController.se
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NoteDto } from 'src/api/service';
+import { TokenService } from '../_service/token.service';
 
 @Component({
   selector: 'app-notes',
@@ -11,7 +12,9 @@ import { NoteDto } from 'src/api/service';
 export class NotesComponent implements OnInit {
   notes$: Observable<NoteDto[]>;
 
-  constructor(private noteService: NoteControllerService) { }
+  constructor(
+    private noteService: NoteControllerService
+    ) { }
 
   ngOnInit() {
     this.notes$ = this.noteService.getAllUsingGET1();

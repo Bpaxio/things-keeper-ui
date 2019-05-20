@@ -14,15 +14,20 @@ export class TokenService {
         localStorage.removeItem(this.key);
         this.token$.next('');
     }
+
     get(): string {
-        return localStorage.getItem(this.key);
+      console.log('token:' + localStorage.getItem(this.key));
+      return localStorage.getItem(this.key);
     }
+
     set(token: string) {
         localStorage.setItem(this.key, token);
     }
+
     getAsObservable(): Observable<string> {
         return this.token$.asObservable();
     }
+
     setAndPublish(token: string) {
       this.set(token);
       this.token$.next(token);

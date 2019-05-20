@@ -9,24 +9,24 @@ import {catchError, map} from 'rxjs/operators';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authenticationService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
 
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authenticationService.isAuthenticated.pipe(
+    return this.authService.isAuthenticated.pipe(
       map(isLogin => {
         if (isLogin) {
           return true;
         } else {
-          this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+          this.router.navigate(['/login'], {queryParams: {referrer: state.url}});
           return false;
         }
       }),
       catchError(error => {
-        this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+        this.router.navigate(['/login'], {queryParams: {referrer: state.url}});
         return throwError(error);
       })
     );

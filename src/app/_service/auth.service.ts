@@ -2,10 +2,9 @@ import { AuthRequest } from './../../api/service/model/authRequest';
 import { AuthResponse } from './../../api/service/model/authResponse';
 import { AuthControllerService } from './../../api/service/api/authController.service';
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, EMPTY, forkJoin, iif, Observable, of, timer} from 'rxjs';
-import {map, switchMap, tap, throttle} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -31,12 +30,13 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
-  login(login: string, password: string): Observable<AuthResponse> {
+  login(username: string, password: string): Observable<AuthResponse> {
     return this.authService
-      .loginUsingPOST({login, password} as AuthRequest)
+      .loginUsingPOST({username, password} as AuthRequest)
       .pipe(
         tap(response => this.tokenService.setAndPublish(response.token)),
         tap(() => this.loggedIn.next(true))
       );
   }
+
 }
