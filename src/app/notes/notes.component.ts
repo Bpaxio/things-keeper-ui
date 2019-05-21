@@ -1,8 +1,7 @@
-import { NoteControllerService } from './../../api/service/api/noteController.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NoteDto } from 'src/api/service';
-import { TokenService } from '../_service/token.service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { NoteDto, NoteControllerService } from 'src/api/service';
+import { NOTES } from 'src/mock-notes';
 
 @Component({
   selector: 'app-notes',
@@ -18,6 +17,7 @@ export class NotesComponent implements OnInit {
 
   ngOnInit() {
     this.notes$ = this.noteService.getAllUsingGET1();
+    // this.notes$ = <BehaviorSubject<NoteDto[]>>new BehaviorSubject(NOTES).asObservable();
   }
 
 }

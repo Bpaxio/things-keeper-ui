@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeDto, RecipeControllerService } from 'src/api/service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { RECIPES } from 'src/mock-recipes';
 
 @Component({
   selector: 'app-recipes',
@@ -6,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
+  recipes$: Observable<RecipeDto[]>;
 
-  constructor() { }
+  constructor(
+    private recipeService: RecipeControllerService
+    ) { }
 
   ngOnInit() {
+    // this.recipes$ = this.recipeService.getAllUsingGET1();
+    this.recipes$ = <BehaviorSubject<RecipeDto[]>>new BehaviorSubject(RECIPES).asObservable();
   }
 
 }

@@ -1,15 +1,15 @@
 <ul class="grid-row">
-  <li *ngFor="let note of notes$|async" class="grid-col">
+  <li *ngFor="let linkMark of linkMarks$|async" class="grid-col">
     <div class="item">
       <div class="item-inner">
         <div class="item-header">
-          {{note.title}}
+          {{linkMark.title}}
         </div>
         <div class="item-body">
-          {{note.description}}
+          {{linkMark.description}}
         </div>
         <div class="item-bottom">
-          {{note.tags}}
+          {{linkMark.tags}}
         </div>
       </div>
     </div>

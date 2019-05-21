@@ -49,6 +49,11 @@ import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { TokenService } from './_service/token.service';
 import { urlConfigFactory } from './_config/url.config.factory';
 import { MainComponent } from './main/main.component';
+import { NoteComponent } from './notes/note/note.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
+import { LinkmarksComponent } from './linkmarks/linkmarks.component';
+import { LinkmarkComponent } from './linkmarks/linkmark/linkmark.component';
+import { RequestInterceptor } from './_interceptor/request.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,11 @@ import { MainComponent } from './main/main.component';
     NotesComponent,
     RecipesComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    NoteComponent,
+    RecipeComponent,
+    LinkmarksComponent,
+    LinkmarkComponent
   ],
   imports: [
     ApiModule.forRoot(urlConfigFactory),
@@ -99,6 +108,7 @@ import { MainComponent } from './main/main.component';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
     APIS,
     HttpClient,
     TokenService,
