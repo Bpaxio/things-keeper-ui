@@ -53,7 +53,7 @@ import { NoteComponent } from './notes/note/note.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { LinkmarksComponent } from './linkmarks/linkmarks.component';
 import { LinkmarkComponent } from './linkmarks/linkmark/linkmark.component';
-import { RequestInterceptor } from './_interceptor/request.interceptor';
+import { TokenInterceptor } from './_interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -108,7 +108,7 @@ import { RequestInterceptor } from './_interceptor/request.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     APIS,
     HttpClient,
     TokenService,

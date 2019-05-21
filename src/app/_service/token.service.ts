@@ -16,7 +16,6 @@ export class TokenService {
     }
 
     get(): string {
-      console.log('token:' + localStorage.getItem(this.key));
       return localStorage.getItem(this.key);
     }
 
