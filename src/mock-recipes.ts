@@ -5,7 +5,7 @@ export const RECIPES: RecipeDto[] = [
     "id": "5ce2c33316bb621a382cfe60",
     "title": "Супер блюдо",
     "category": "Dinner",
-    "link": "some-recipes.com",
+    "link": "https://material.angular.io/assets/img/examples/shiba2.jpg",
     "created": new Date("2019-05-20T18:09:39.435"),
     "description": "описание обеда",
     "tags": [
@@ -16,7 +16,7 @@ export const RECIPES: RecipeDto[] = [
     ],
     "image": {
       "id": "5ce2c33316bb621a382cfe5c",
-      "link": "http://file-service/file",
+      "link": "https://material.angular.io/assets/img/examples/shiba2.jpg",
       "originalName": "Картинка обеда.jpg"
     },
     "steps": [

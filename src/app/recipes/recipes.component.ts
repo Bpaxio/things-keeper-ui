@@ -16,8 +16,8 @@ export class RecipesComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // this.recipes$ = this.recipeService.getAllUsingGET1();
-    this.recipes$ = <BehaviorSubject<RecipeDto[]>>new BehaviorSubject(RECIPES).asObservable();
+    this.recipes$ = this.recipeService.getAllUsingGET2();
+    // this.recipes$ = <BehaviorSubject<RecipeDto[]>> new BehaviorSubject(RECIPES).asObservable();
   }
 
 }

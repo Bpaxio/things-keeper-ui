@@ -1,3 +1,25 @@
-<p>
-  linkmark works!
-</p>
+<div class="linkmark-container">
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field class="input-full-width">
+        <input matInput formControlName="title" placeholder="Название">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="input-full-width input-textarea">
+        <textarea matInput formControlName="description" placeholder="Текст"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field class="input-full-width">
+          <input matInput formControlName="link" placeholder="Ссылка">
+        </mat-form-field>
+      </div>
+    <div>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" (click)="save()">
+        Сохранить
+      </button>
+      <button mat-flat-button type="reset" (click)="cancel()">Отменить</button>
+    </div>
+  </form>
+</div>

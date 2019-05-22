@@ -19,27 +19,23 @@ export class NoteComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private noteService: NoteControllerService) { }
+    private service: NoteControllerService) {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.service.getUsingGET1(id)
+      .subscribe(note => {
+        this.note = note;
+        this.createForm();
+      });
+    }
+    this.createForm();
+  }
 
   ngOnInit() {
-    const uuid = this.route.snapshot.paramMap.get('uuid');
-    of(uuid)
-      .pipe(
-        switchMap(uuid =>
-          iif(
-            () => uuid !== null,
-            this.noteService.getUsingGET1(uuid),
-            EMPTY
-          )
-        )
-      )
-      .subscribe(note => {
-          this.note = note;
-          this.createForm();
-        });
   }
 
   private createForm() {
+    console.log(this.note);
     this.form = new FormGroup(
       {
         title: new FormControl(this.note ? this.note.title : '', Validators.required),
@@ -48,15 +44,23 @@ export class NoteComponent implements OnInit {
     );
   }
 
+  save() {
+    if (this.note) {
+      return this.edit();
+    }
+    return this.create();
+  }
+
   edit() {
     this.note.description = this.form.get('description').value;
     this.note.title = this.form.get('title').value;
-    this.noteService.updateUsingPUT1(this.note)
-      .subscribe(note => this.note = note);
+    this.service.updateUsingPUT1(this.note)
+      // .subscribe(note => this.note = note)
+      .subscribe(note => this.router.navigate(['/notes']));
   }
 
   create() {
-    this.noteService.createUsingPOST1({
+    this.service.createUsingPOST1({
       title: this.form.get('title').value,
       description: this.form.get('description').value
     } as NoteDto)

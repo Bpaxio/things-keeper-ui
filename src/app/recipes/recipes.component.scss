@@ -1,2 +1,32 @@
 @import "./../variables_main";
 @import "./../note_base";
+
+.create-btn {
+  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.img_preview {
+  width: 100%;
+  max-width: 100px;
+  height: 100%;
+  max-height: 75px;
+}
+.card {
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 300px;
+  height: 100%;
+  min-height: 250px;
+  align-items: flex-start;
+  overflow: hidden;
+  text-align: center;
+  padding: 25px;
+  position: relative;
+  .card-header {
+    margin: auto !important;
+  }
+}

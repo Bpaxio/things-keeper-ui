@@ -1,7 +1,7 @@
 <button mat-flat-button color="primary" routerLink='create' class="create-btn">+</button>
 <ul class="grid-row">
   <li *ngFor="let note of notes$|async" class="grid-col">
-    <div class="item">
+    <div routerLink='{{note.id}}' class="item">
       <div class="item-inner">
         <div class="item-header">
           {{note.title}}
@@ -10,7 +10,13 @@
           {{note.description}}
         </div>
         <div class="item-bottom">
-          {{note.tags}}
+          <ul class="grid-row">
+            <li *ngFor="let tag of note.tags" class="tags-col">
+              <div class="tagList">
+                {{tag.value}}
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

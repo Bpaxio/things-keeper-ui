@@ -23,7 +23,16 @@ export const LINKMARKS: LinkMarkDto[] = [
     "tags": [
       {
         "id": "5ce2bce616bb621bfcf973a9",
-        "value": "dev-ops"
+        "value": "angular"
+      },
+      
+      {
+        "id": "5ce2bce616bb621bfcf773a5",
+        "value": "ui"
+      },
+      {
+        "id": "5ce2bce616bb621bfcf573a5",
+        "value": "dev"
       }
     ]
   }

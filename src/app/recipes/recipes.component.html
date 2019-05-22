@@ -1,17 +1,31 @@
-<ul class="grid-row">
-  <li *ngFor="let recipe of recipes$|async" class="grid-col">
-    <div class="item">
-      <div class="item-inner">
-        <div class="item-header">
-          {{recipe.title}}
-        </div>
-        <div class="item-body">
-          {{recipe.description}}
-        </div>
-        <div class="item-bottom">
-          {{recipe.tags}}
-        </div>
-      </div>
-    </div>
-  </li>
-</ul>
+<button mat-flat-button color="primary" routerLink='create' class="create-btn">+</button>
+<div class="grid-row">
+  <div *ngFor="let recipe of recipes$|async" class="grid-col">
+        <mat-card routerLink='{{recipe.id}}' class="card">
+          <mat-card-header class="card-header">
+            <div class="card-header">
+                <mat-card-title>{{recipe.title}}</mat-card-title>
+                <mat-card-subtitle>{{recipe.category}}</mat-card-subtitle>
+            </div>
+          </mat-card-header>
+          <img mat-card-image class="img_preview" src="{{recipe.image.link}}" alt="">
+          <mat-card-content>
+            <p> 
+              {{recipe.description}}
+            </p>
+            
+          <ul class="grid-row">
+              <li *ngFor="let tag of recipe.tags" class="tags-col">
+                <div class="tagList">
+                  {{tag.value}}
+                </div>
+              </li>
+            </ul>
+          </mat-card-content>
+          
+          <mat-card-actions>
+            <a color="primary" *ngIf="recipe.link" href="{{recipe.link}}" mat-button>Посмотреть оригинал</a>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</div>

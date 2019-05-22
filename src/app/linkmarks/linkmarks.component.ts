@@ -16,8 +16,8 @@ export class LinkmarksComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // this.linkMark$ = this.linkMarkService.getAllUsingGET1();
-    this.linkMarks$ = <BehaviorSubject<LinkMarkDto[]>>new BehaviorSubject(LINKMARKS).asObservable();
+    this.linkMarks$ = this.linkMarkService.getAllUsingGET();
+    // this.linkMarks$ = <BehaviorSubject<LinkMarkDto[]>>new BehaviorSubject(LINKMARKS).asObservable();
   }
 
 }

@@ -11,15 +11,9 @@
       </mat-form-field>
     </div>
     <div>
-      <button *ngIf="note else create" mat-flat-button color="primary" type="submit"
-          [disabled]="form.invalid" (click)="edit()">
-        Создать
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" (click)="save()">
+        Сохранить
       </button>
-      <ng-template #create>
-        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" (click)="create()">
-          Создать
-        </button>
-      </ng-template>
       <button mat-flat-button type="reset" (click)="cancel()">Отменить</button>
     </div>
   </form>
