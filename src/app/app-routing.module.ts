@@ -1,4 +1,5 @@
 import { NoteComponent } from './notes/note/note.component';
+import { RegisterComponent } from './register/register.component';
 import { LinkmarksComponent } from './linkmarks/linkmarks.component';
 import { AuthGuard } from './_service/auth.guard';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +12,7 @@ import { RouteComponent } from './route/route.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  // {path: 'notes', canActivate: [AuthGuard], component: NotesComponent},
+  { path: 'register', component: RegisterComponent},
   {
     path: '', component: MainComponent, canActivate: [AuthGuard],
     children: [
@@ -28,10 +29,6 @@ const routes: Routes = [
       { path: 'linkmarks', component: LinkmarksComponent },
     ]
   },
-  // { path: 'notes', component: NotesComponent, outlet: 'app' },
-  // { path: 'recipes', component: RecipesComponent, outlet: 'app' },
-  // { path: 'linkmarks', component: LinkmarksComponent, outlet: 'app' },
-  // {path: '', redirectTo: '/notes', pathMatch: 'full'},
 ];
 
 @NgModule({

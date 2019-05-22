@@ -55,6 +55,7 @@ import { LinkmarksComponent } from './linkmarks/linkmarks.component';
 import { LinkmarkComponent } from './linkmarks/linkmark/linkmark.component';
 import { TokenInterceptor } from './_interceptor/token.interceptor';
 import { RouteComponent } from './route/route.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { RouteComponent } from './route/route.component';
     RecipeComponent,
     LinkmarksComponent,
     LinkmarkComponent,
-    RouteComponent
+    RouteComponent,
+    RegisterComponent
   ],
   imports: [
     ApiModule.forRoot(urlConfigFactory),

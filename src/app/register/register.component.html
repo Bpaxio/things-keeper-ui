@@ -1,0 +1,41 @@
+<div class="register-container">
+  <div class="register-tab">
+    <h1>Зарегистририваться</h1>
+    <form [formGroup]="form" (submit)="register()">
+      <div class="input-control">
+        <mat-form-field hideRequiredMarker>
+          <input matInput required formControlName="login" placeholder="Логин" (input)="clearErrorMsg()"/>
+          <mat-error *ngIf="form.get('login').hasError('required')">
+            Поле обязательно для заполнения
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-control">
+        <mat-form-field hideRequiredMarker>
+          <input matInput required type="password" formControlName="password" placeholder="Пароль" />
+          <mat-error *ngIf="form.get('password').hasError('required')">
+            Поле обязательно для заполнения
+          </mat-error>
+          <mat-error *ngIf="form.get('password').hasError('minlength')">
+              Пароль слишком короткий.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-control">
+        <mat-form-field hideRequiredMarker>
+          <input matInput required type="password" formControlName="passwordConfirm" placeholder="Повторите пароль" [errorStateMatcher]="passwordsMatcher"/>
+          <mat-error *ngIf="form.get('passwordConfirm').hasError('required')">
+            Поле обязательно для заполнения
+          </mat-error>
+          <mat-error *ngIf="form.hasError('nonMatch')">
+              Пароли не совпадают
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="register-btn-container">
+          <button mat-flat-button color="primary" [disabled]="form.invalid" class="register-btn">Создать</button>
+          <a mat-button routerLink="/login" class="register-btn">У меня есть аккаунт</a>
+      </div>
+    </form>
+  </div>
+</div>
