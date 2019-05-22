@@ -1,3 +1,26 @@
-<p>
-  note works!
-</p>
+<div class="note-container">
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field class="input-full-width">
+        <input matInput formControlName="title" placeholder="Название">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="input-full-width input-textarea">
+        <textarea matInput formControlName="description" placeholder="Текст"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button *ngIf="note else create" mat-flat-button color="primary" type="submit"
+          [disabled]="form.invalid" (click)="edit()">
+        Создать
+      </button>
+      <ng-template #create>
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid" (click)="create()">
+          Создать
+        </button>
+      </ng-template>
+      <button mat-flat-button type="reset" (click)="cancel()">Отменить</button>
+    </div>
+  </form>
+</div>
