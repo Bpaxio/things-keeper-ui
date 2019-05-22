@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { RecipeDto, RecipeControllerService } from 'src/api/service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 
 @Component({
   selector: 'app-recipe',
@@ -11,7 +12,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RecipeComponent implements OnInit {
   recipe: RecipeDto;
   form: FormGroup;
-
+  file: UploadFile;
+  uploadedFile = false;
+  imageUrl: string | ArrayBuffer;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,8 +43,21 @@ export class RecipeComponent implements OnInit {
         description: new FormControl(this.recipe ? this.recipe.description : '', Validators.required),
         category: new FormControl(this.recipe ? this.recipe.category : ''),
         link: new FormControl(this.recipe ? this.recipe.link : ''),
+        steps: new FormArray([new FormGroup({step: new FormControl('')})])
       }
     );
+  }
+
+  get steps() {
+    return this.form.get('steps') as FormArray;
+  }
+
+  addStep() {
+    this.steps.push(new FormGroup({step: new FormControl('')}));
+  }
+
+  deleteStep(index) {
+    this.steps.removeAt(index);
   }
 
   save() {
@@ -69,6 +85,19 @@ export class RecipeComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/recipes']);
+  }
+
+  dropped(event: UploadEvent) {
+    this.file = event.files[0];
+    this.uploadedFile = true;
+    const fileEntry = this.file.fileEntry as FileSystemFileEntry;
+    const reader = new FileReader();
+    fileEntry.file(file => {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            this.imageUrl = reader.result;
+        };
+    });
   }
 
 }

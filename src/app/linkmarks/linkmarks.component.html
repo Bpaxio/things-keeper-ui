@@ -10,10 +10,10 @@
           {{linkMark.description}}
         </div>
         <div class="item-bottom">
-          <a color="primary" *ngIf="linkMark.link" href="{{linkMark.link}}" mat-button>Перейти к оригиналу</a>
+          <a color="primary" *ngIf="linkMark.link" href="{{linkMark.link}}" mat-button>Перейти по ссылке</a>
         </div>
         <div class="item-bottom">
-          <ul class="grid-row">
+          <ul class="grid-row tags-grid">
             <li *ngFor="let tag of linkMark.tags" class="tags-col">
               <div class="tagList">
                 {{tag.value}}

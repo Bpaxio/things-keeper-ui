@@ -1,13 +1,34 @@
+@import "./../../variables_main";
+
 .recipe-container {
     position: fixed;
     top: 20%;
     left: 10%;
+		clear: both;
+		width: 100%;
+    overflow: auto;
+    max-width: 1430px;
   }
-  
+
   .input-full-width {
-    width: 1000px;
+    min-width: 400px;
   }
-  
-  textarea {
+
+  .input-textarea-text textarea {
     min-height: 500px;
+  }
+
+  .input-textarea-step textarea {
+    min-height: 100px;
+  }
+
+  .column-left {
+    float: left;
+    width: 49%;
+    border-right: 1px solid $blue;
+  }
+
+  .column-right {
+    float: right;
+    width: 49%;
   }

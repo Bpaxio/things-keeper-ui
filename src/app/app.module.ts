@@ -56,6 +56,7 @@ import { LinkmarkComponent } from './linkmarks/linkmark/linkmark.component';
 import { TokenInterceptor } from './_interceptor/token.interceptor';
 import { RouteComponent } from './route/route.component';
 import { RegisterComponent } from './register/register.component';
+import { FileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { RegisterComponent } from './register/register.component';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FileDropModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

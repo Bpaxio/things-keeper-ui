@@ -10,11 +10,11 @@
           </mat-card-header>
           <img mat-card-image class="img_preview" src="{{recipe.image.link}}" alt="">
           <mat-card-content>
-            <p> 
+            <p>
               {{recipe.description}}
             </p>
-            
-          <ul class="grid-row">
+
+          <ul class="grid-row tags-grid">
               <li *ngFor="let tag of recipe.tags" class="tags-col">
                 <div class="tagList">
                   {{tag.value}}
@@ -22,9 +22,9 @@
               </li>
             </ul>
           </mat-card-content>
-          
+
           <mat-card-actions>
-            <a color="primary" *ngIf="recipe.link" href="{{recipe.link}}" mat-button>Посмотреть оригинал</a>
+            <a color="primary" *ngIf="recipe.link" href="{{recipe.link}}" mat-button>Перейти по ссылке</a>
           </mat-card-actions>
         </mat-card>
   </div>
