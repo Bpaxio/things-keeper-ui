@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "Will save your notes.",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "title": "Things Keeper",
     "termsOfService": "Terms of service url",
     "contact": {
@@ -12,11 +12,11 @@
     },
     "license": {
       "name": "Apache License 2.0",
-      "url": "https://github.com/Bpaxio/things-keeper/blob/master/LICENSE"
+      "url": "https://github.com/Bpaxio/infrastructure-keeper/blob/master/LICENSE"
     }
   },
   "host": "localhost:8080",
-  "basePath": "/",
+  "basePath": "/api/meta",
   "tags": [
     {
       "name": "auth-controller",
@@ -44,1122 +44,6 @@
     }
   ],
   "paths": {
-    "/api/v1/linkmarks": {
-      "get": {
-        "tags": [
-          "link-mark-controller"
-        ],
-        "summary": "getAll",
-        "operationId": "getAllUsingGET",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "description",
-            "in": "query",
-            "description": "Search 'input' in 'description' of the note",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The First date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "name": "input",
-            "in": "query",
-            "description": "Search in string-like fields of the note('title' by default)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "link",
-            "in": "query",
-            "description": "Search 'input' in 'link' of the note",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "description": "'value' of tag, which is contained by note",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The Last date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LinkMarkDto"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "link-mark-controller"
-        ],
-        "summary": "create",
-        "operationId": "createUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "dto",
-            "description": "dto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkMarkDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LinkMarkDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "link-mark-controller"
-        ],
-        "summary": "update",
-        "operationId": "updateUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "dto",
-            "description": "dto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkMarkDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LinkMarkDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/linkmarks/{id}": {
-      "get": {
-        "tags": [
-          "link-mark-controller"
-        ],
-        "summary": "get",
-        "operationId": "getUsingGET",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LinkMarkDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "link-mark-controller"
-        ],
-        "summary": "deleteById",
-        "operationId": "deleteByIdUsingDELETE",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/notes": {
-      "get": {
-        "tags": [
-          "note-controller"
-        ],
-        "summary": "getAll",
-        "operationId": "getAllUsingGET_1",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "description",
-            "in": "query",
-            "description": "Search 'input' in 'description' of the note",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The First date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "name": "input",
-            "in": "query",
-            "description": "Search in string-like fields of the note('title' by default)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "description": "'value' of tag, which is contained by note",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The Last date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NoteDto"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "note-controller"
-        ],
-        "summary": "create",
-        "operationId": "createUsingPOST_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "noteDto",
-            "description": "noteDto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NoteDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NoteDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "note-controller"
-        ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "noteDto",
-            "description": "noteDto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NoteDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NoteDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/notes/{id}": {
-      "get": {
-        "tags": [
-          "note-controller"
-        ],
-        "summary": "get",
-        "operationId": "getUsingGET_1",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NoteDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "note-controller"
-        ],
-        "summary": "deleteById",
-        "operationId": "deleteByIdUsingDELETE_1",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/recipes": {
-      "get": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "getAll",
-        "operationId": "getAllUsingGET_2",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "category",
-            "in": "query",
-            "description": "'category' of the recipe",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The First date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          },
-          {
-            "name": "ingredient",
-            "in": "query",
-            "description": "Search 'input' in 'ingredient name' of the recipe(true by default)",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "input",
-            "in": "query",
-            "description": "Search in string-like fields of the note('title' by default)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "link",
-            "in": "query",
-            "description": "Search 'input' in 'link' of the note",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "tag",
-            "in": "query",
-            "description": "'value' of tag, which is contained by note",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "description": "[yyyy-mm-dd] The Last date note was created",
-            "required": false,
-            "type": "string",
-            "format": "date"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RecipeDto"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "create",
-        "operationId": "createUsingPOST_2",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "dto",
-            "description": "dto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecipeDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecipeDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_2",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "dto",
-            "description": "dto",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecipeDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecipeDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/recipes/{id}": {
-      "get": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "get",
-        "operationId": "getUsingGET_2",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RecipeDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "deleteById",
-        "operationId": "deleteByIdUsingDELETE_2",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/recipes/{id}/{imageId}": {
-      "post": {
-        "tags": [
-          "recipe-controller"
-        ],
-        "summary": "addImageToRecipe",
-        "operationId": "loadImageUsingPOST",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json;charset=UTF-8"
-        ],
-        "parameters": [
-          {
-            "name": "file",
-            "in": "formData",
-            "description": "file",
-            "required": true,
-            "type": "file"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "imageId",
-            "in": "path",
-            "description": "imageId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ImageDto"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/tags": {
-      "get": {
-        "tags": [
-          "tag-controller"
-        ],
-        "summary": "getAll",
-        "operationId": "getTagsUsingGET",
-        "produces": [
-          "*/*"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Tag"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "tag-controller"
-        ],
-        "summary": "create",
-        "operationId": "createTagUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "tag",
-            "description": "tag",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Tag"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Tag"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "tag-controller"
-        ],
-        "summary": "update",
-        "operationId": "updateTagUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "tag",
-            "description": "tag",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Tag"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Tag"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
-    "/api/v1/tags/{id}": {
-      "get": {
-        "tags": [
-          "tag-controller"
-        ],
-        "summary": "get",
-        "operationId": "getTagUsingGET",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Tag"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      },
-      "delete": {
-        "tags": [
-          "tag-controller"
-        ],
-        "summary": "deleteById",
-        "operationId": "deleteTagByIdUsingDELETE",
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "security": [
-          {
-            "TOKEN": [
-              "global"
-            ]
-          }
-        ],
-        "deprecated": false
-      }
-    },
     "/auth/login": {
       "post": {
         "tags": [
@@ -1259,16 +143,19 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingGET",
+        "summary": "error",
+        "operationId": "errorUsingGET",
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "401": {
@@ -1287,19 +174,22 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingHEAD",
+        "summary": "error",
+        "operationId": "errorUsingHEAD",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "204": {
@@ -1318,19 +208,22 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingPOST",
+        "summary": "error",
+        "operationId": "errorUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "201": {
@@ -1352,19 +245,22 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingPUT",
+        "summary": "error",
+        "operationId": "errorUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "201": {
@@ -1386,16 +282,19 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingDELETE",
+        "summary": "error",
+        "operationId": "errorUsingDELETE",
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "204": {
@@ -1414,19 +313,22 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingOPTIONS",
+        "summary": "error",
+        "operationId": "errorUsingOPTIONS",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "204": {
@@ -1445,19 +347,22 @@
         "tags": [
           "basic-error-controller"
         ],
-        "summary": "errorHtml",
-        "operationId": "errorHtmlUsingPATCH",
+        "summary": "error",
+        "operationId": "errorUsingPATCH",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "text/html"
+          "*/*"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModelAndView"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
             }
           },
           "204": {
@@ -1472,10 +377,1126 @@
         },
         "deprecated": false
       }
+    },
+    "/linkmarks": {
+      "get": {
+        "tags": [
+          "link-mark-controller"
+        ],
+        "summary": "getAll",
+        "operationId": "getAllUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Search 'input' in 'description' of the note",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The First date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "input",
+            "in": "query",
+            "description": "Search in string-like fields of the note('title' by default)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Search 'input' in 'link' of the note",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "'value' of tag, which is contained by note",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The Last date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkMarkDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "link-mark-controller"
+        ],
+        "summary": "create",
+        "operationId": "createUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dto",
+            "description": "dto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkMarkDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkMarkDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "link-mark-controller"
+        ],
+        "summary": "update",
+        "operationId": "updateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dto",
+            "description": "dto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkMarkDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkMarkDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/linkmarks/{id}": {
+      "get": {
+        "tags": [
+          "link-mark-controller"
+        ],
+        "summary": "get",
+        "operationId": "getUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkMarkDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "link-mark-controller"
+        ],
+        "summary": "deleteById",
+        "operationId": "deleteByIdUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/notes": {
+      "get": {
+        "tags": [
+          "note-controller"
+        ],
+        "summary": "getAll",
+        "operationId": "getAllUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Search 'input' in 'description' of the note",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The First date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "input",
+            "in": "query",
+            "description": "Search in string-like fields of the note('title' by default)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "'value' of tag, which is contained by note",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The Last date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NoteDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "note-controller"
+        ],
+        "summary": "create",
+        "operationId": "createUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "noteDto",
+            "description": "noteDto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NoteDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NoteDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "note-controller"
+        ],
+        "summary": "update",
+        "operationId": "updateUsingPUT_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "noteDto",
+            "description": "noteDto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NoteDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NoteDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/notes/{id}": {
+      "get": {
+        "tags": [
+          "note-controller"
+        ],
+        "summary": "get",
+        "operationId": "getUsingGET_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NoteDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "note-controller"
+        ],
+        "summary": "deleteById",
+        "operationId": "deleteByIdUsingDELETE_1",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/recipes": {
+      "get": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "getAll",
+        "operationId": "getAllUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "'category' of the recipe",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The First date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "ingredient",
+            "in": "query",
+            "description": "Search 'input' in 'ingredient name' of the recipe(true by default)",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "input",
+            "in": "query",
+            "description": "Search in string-like fields of the note('title' by default)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Search 'input' in 'link' of the note",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "'value' of tag, which is contained by note",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "[yyyy-mm-dd] The Last date note was created",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecipeDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "create",
+        "operationId": "createUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dto",
+            "description": "dto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecipeDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecipeDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "update",
+        "operationId": "updateUsingPUT_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dto",
+            "description": "dto",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecipeDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecipeDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "get",
+        "operationId": "getUsingGET_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecipeDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "deleteById",
+        "operationId": "deleteByIdUsingDELETE_2",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/recipes/{id}/{imageId}": {
+      "post": {
+        "tags": [
+          "recipe-controller"
+        ],
+        "summary": "addImageToRecipe",
+        "operationId": "loadImageUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "description": "imageId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "getAll",
+        "operationId": "getTagsUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "create",
+        "operationId": "createTagUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tag",
+            "description": "tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "update",
+        "operationId": "updateTagUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "tag",
+            "description": "tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/tags/{id}": {
+      "get": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "get",
+        "operationId": "getTagUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "tag-controller"
+        ],
+        "summary": "deleteById",
+        "operationId": "deleteTagByIdUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "JWT": [
+              "global"
+            ]
+          }
+        ],
+        "deprecated": false
+      }
     }
   },
   "securityDefinitions": {
-    "TOKEN": {
+    "JWT": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header"
@@ -1505,6 +1526,73 @@
         }
       },
       "title": "AuthResponse"
+    },
+    "File": {
+      "type": "object",
+      "properties": {
+        "absolute": {
+          "type": "boolean"
+        },
+        "absoluteFile": {
+          "$ref": "#/definitions/File"
+        },
+        "absolutePath": {
+          "type": "string"
+        },
+        "canonicalFile": {
+          "$ref": "#/definitions/File"
+        },
+        "canonicalPath": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "boolean"
+        },
+        "executable": {
+          "type": "boolean"
+        },
+        "file": {
+          "type": "boolean"
+        },
+        "freeSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "lastModified": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "parentFile": {
+          "$ref": "#/definitions/File"
+        },
+        "path": {
+          "type": "string"
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "totalSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usableSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "writable": {
+          "type": "boolean"
+        }
+      },
+      "title": "File"
     },
     "ImageDto": {
       "type": "object",
@@ -1592,70 +1680,73 @@
         "status": {
           "type": "string",
           "enum": [
-            "100",
-            "101",
-            "102",
-            "103",
-            "200",
-            "201",
-            "202",
-            "203",
-            "204",
-            "205",
-            "206",
-            "207",
-            "208",
-            "226",
-            "300",
-            "301",
-            "302",
-            "303",
-            "304",
-            "305",
-            "307",
-            "308",
-            "400",
-            "401",
-            "402",
-            "403",
-            "404",
-            "405",
-            "406",
-            "407",
-            "408",
-            "409",
-            "410",
-            "411",
-            "412",
-            "413",
-            "414",
-            "415",
-            "416",
-            "417",
-            "418",
-            "419",
-            "420",
-            "421",
-            "422",
-            "423",
-            "424",
-            "426",
-            "428",
-            "429",
-            "431",
-            "451",
-            "500",
-            "501",
-            "502",
-            "503",
-            "504",
-            "505",
-            "506",
-            "507",
-            "508",
-            "509",
-            "510",
-            "511"
+            "100 CONTINUE",
+            "101 SWITCHING_PROTOCOLS",
+            "102 PROCESSING",
+            "103 CHECKPOINT",
+            "200 OK",
+            "201 CREATED",
+            "202 ACCEPTED",
+            "203 NON_AUTHORITATIVE_INFORMATION",
+            "204 NO_CONTENT",
+            "205 RESET_CONTENT",
+            "206 PARTIAL_CONTENT",
+            "207 MULTI_STATUS",
+            "208 ALREADY_REPORTED",
+            "226 IM_USED",
+            "300 MULTIPLE_CHOICES",
+            "301 MOVED_PERMANENTLY",
+            "302 FOUND",
+            "302 MOVED_TEMPORARILY",
+            "303 SEE_OTHER",
+            "304 NOT_MODIFIED",
+            "305 USE_PROXY",
+            "307 TEMPORARY_REDIRECT",
+            "308 PERMANENT_REDIRECT",
+            "400 BAD_REQUEST",
+            "401 UNAUTHORIZED",
+            "402 PAYMENT_REQUIRED",
+            "403 FORBIDDEN",
+            "404 NOT_FOUND",
+            "405 METHOD_NOT_ALLOWED",
+            "406 NOT_ACCEPTABLE",
+            "407 PROXY_AUTHENTICATION_REQUIRED",
+            "408 REQUEST_TIMEOUT",
+            "409 CONFLICT",
+            "410 GONE",
+            "411 LENGTH_REQUIRED",
+            "412 PRECONDITION_FAILED",
+            "413 PAYLOAD_TOO_LARGE",
+            "413 REQUEST_ENTITY_TOO_LARGE",
+            "414 URI_TOO_LONG",
+            "414 REQUEST_URI_TOO_LONG",
+            "415 UNSUPPORTED_MEDIA_TYPE",
+            "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+            "417 EXPECTATION_FAILED",
+            "418 I_AM_A_TEAPOT",
+            "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+            "420 METHOD_FAILURE",
+            "421 DESTINATION_LOCKED",
+            "422 UNPROCESSABLE_ENTITY",
+            "423 LOCKED",
+            "424 FAILED_DEPENDENCY",
+            "426 UPGRADE_REQUIRED",
+            "428 PRECONDITION_REQUIRED",
+            "429 TOO_MANY_REQUESTS",
+            "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+            "500 INTERNAL_SERVER_ERROR",
+            "501 NOT_IMPLEMENTED",
+            "502 BAD_GATEWAY",
+            "503 SERVICE_UNAVAILABLE",
+            "504 GATEWAY_TIMEOUT",
+            "505 HTTP_VERSION_NOT_SUPPORTED",
+            "506 VARIANT_ALSO_NEGOTIATES",
+            "507 INSUFFICIENT_STORAGE",
+            "508 LOOP_DETECTED",
+            "509 BANDWIDTH_LIMIT_EXCEEDED",
+            "510 NOT_EXTENDED",
+            "511 NETWORK_AUTHENTICATION_REQUIRED"
           ]
         },
         "view": {
@@ -1738,6 +1829,36 @@
       },
       "title": "RecipeDto"
     },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/definitions/File"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "inputStream": {
+          "$ref": "#/definitions/InputStream"
+        },
+        "open": {
+          "type": "boolean"
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "uri": {
+          "$ref": "#/definitions/URI"
+        },
+        "url": {
+          "$ref": "#/definitions/URL"
+        }
+      },
+      "title": "Resource"
+    },
     "StepDto": {
       "type": "object",
       "properties": {
@@ -1771,6 +1892,116 @@
         }
       },
       "title": "Tag"
+    },
+    "URI": {
+      "type": "object",
+      "properties": {
+        "absolute": {
+          "type": "boolean"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "fragment": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "opaque": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "query": {
+          "type": "string"
+        },
+        "rawAuthority": {
+          "type": "string"
+        },
+        "rawFragment": {
+          "type": "string"
+        },
+        "rawPath": {
+          "type": "string"
+        },
+        "rawQuery": {
+          "type": "string"
+        },
+        "rawSchemeSpecificPart": {
+          "type": "string"
+        },
+        "rawUserInfo": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "schemeSpecificPart": {
+          "type": "string"
+        },
+        "userInfo": {
+          "type": "string"
+        }
+      },
+      "title": "URI"
+    },
+    "URL": {
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object"
+        },
+        "defaultPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deserializedFields": {
+          "$ref": "#/definitions/URLStreamHandler"
+        },
+        "file": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "serializedHashCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userInfo": {
+          "type": "string"
+        }
+      },
+      "title": "URL"
+    },
+    "URLStreamHandler": {
+      "type": "object",
+      "title": "URLStreamHandler"
     },
     "View": {
       "type": "object",

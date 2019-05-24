@@ -6,15 +6,10 @@
           <input matInput formControlName="title" placeholder="Название">
         </mat-form-field>
       </div>
-      <file-drop dropZoneLabel="Выбрать фото или перетащить фото сюда" accept="png" [showBrowseBtn]="true"
-          browseBtnClassName="mat-flat-button mat-primary" (onFileDrop)="dropped($event)">
-      </file-drop>
-      <div *ngIf="uploadedFile">
-        <img [src]="imageUrl" width="100px" height="100px">
-      </div>
+      
       <div>
         <mat-form-field class="input-full-width input-textarea-text">
-          <textarea matInput formControlName="description" placeholder="Текст"></textarea>
+          <textarea matInput formControlName="description" placeholder="Описание"></textarea>
         </mat-form-field>
       </div>
       <div>

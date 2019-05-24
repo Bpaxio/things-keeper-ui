@@ -9,10 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { URI } from './uRI';
+import { URL } from './uRL';
 
 
-export interface AuthRequest { 
-    password?: string;
-    username?: string;
+export interface Resource { 
+    description?: string;
+    file?: any;
+    filename?: string;
+    inputStream?: any;
+    open?: boolean;
+    readable?: boolean;
+    uri?: URI;
+    url?: URL;
 }
 

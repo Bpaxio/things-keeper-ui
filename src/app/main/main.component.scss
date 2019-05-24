@@ -35,6 +35,10 @@
     display: flex;
     flex-wrap: nowrap;
 }
+.user-nav {
+    position: Absolute;
+    right: 100px;
+}
 
 .middle-nav-link-cont {
     display: -webkit-box;

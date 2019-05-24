@@ -12,6 +12,7 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
+  username: string;
 
   constructor(
       private tokenService: TokenService,
@@ -26,6 +27,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this.username = null;
     this.tokenService.clear();
     this.loggedIn.next(false);
   }
@@ -35,7 +37,8 @@ export class AuthService {
       .loginUsingPOST({username, password} as AuthRequest)
       .pipe(
         tap(response => this.tokenService.setAndPublish(response.token)),
-        tap(() => this.loggedIn.next(true))
+        tap(() => this.loggedIn.next(true)),
+        tap(response => this.username = response.username)
       );
   }
 
@@ -44,7 +47,8 @@ export class AuthService {
       .loginUsingPOST({username, password} as AuthRequest)
       .pipe(
         tap(response => this.tokenService.setAndPublish(response.token)),
-        tap(() => this.loggedIn.next(true))
+        tap(() => this.loggedIn.next(true)),
+        tap(response => this.username = response.username)
       );
   }
 
