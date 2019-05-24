@@ -44,7 +44,7 @@ export class AuthService {
 
   register(username: string, password: string): Observable<AuthResponse> {
     return this.authService
-      .loginUsingPOST({username, password} as AuthRequest)
+      .registerUsingPOST({username, password} as AuthRequest)
       .pipe(
         tap(response => this.tokenService.setAndPublish(response.token)),
         tap(() => this.loggedIn.next(true)),

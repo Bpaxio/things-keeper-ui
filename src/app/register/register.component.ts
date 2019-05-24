@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.authService
-      .login(
+      .register(
         this.form.get('login').value,
         this.form.get('password').value
       )

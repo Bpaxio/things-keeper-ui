@@ -38,14 +38,9 @@ export class RecipeComponent implements OnInit {
         description: this.formBuilder.control(this.recipe ? this.recipe.description : '', Validators.required),
         category: this.formBuilder.control(this.recipe ? this.recipe.category : ''),
         link: this.formBuilder.control(this.recipe ? this.recipe.link : ''),
-        steps: this.formBuilder.array([this.recipe ? this.createSteps() : this.formBuilder.group({step: this.formBuilder.control('')})])
+        steps: new FormArray([new FormGroup({step: new FormControl('')})])
       }
     );
-  }
-
-  private createSteps() {
-    return this.recipe.steps
-      .map(step => this.formBuilder.group(this.formBuilder.control(step.description)) as FormGroup) ;
   }
 
   get steps() {
