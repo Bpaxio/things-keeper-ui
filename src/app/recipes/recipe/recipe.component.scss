@@ -11,15 +11,21 @@
   }
 
   .input-full-width {
-    min-width: 400px;
+    min-width: 300px;
+    width: 90%;
+    max-width: 800px;
   }
 
   .input-textarea-text textarea {
-    min-height: 500px;
+    min-height: 300px;
+    
+    min-width: 400px;
+    width: 90%;
+    max-width: 1000px;
   }
 
   .input-textarea-step textarea {
-    min-height: 100px;
+    min-height: 50px;
   }
 
   .column-left {

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { RecipeDto, RecipeControllerService } from 'src/api/service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 
 @Component({
   selector: 'app-recipe',
@@ -12,9 +11,6 @@ import { UploadEvent, UploadFile, FileSystemFileEntry } from 'ngx-file-drop';
 export class RecipeComponent implements OnInit {
   recipe: RecipeDto;
   form: FormGroup;
-  file: UploadFile;
-  uploadedFile = false;
-  imageUrl: string | ArrayBuffer;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,13 +32,12 @@ export class RecipeComponent implements OnInit {
   }
 
   private createForm() {
-    console.log(this.recipe)
-    this.form = new FormGroup(
+    this.form = this.formBuilder.group(
       {
-        title: new FormControl(this.recipe ? this.recipe.title : '', Validators.required),
-        description: new FormControl(this.recipe ? this.recipe.description : '', Validators.required),
-        category: new FormControl(this.recipe ? this.recipe.category : ''),
-        link: new FormControl(this.recipe ? this.recipe.link : ''),
+        title: this.formBuilder.control(this.recipe ? this.recipe.title : '', Validators.required),
+        description: this.formBuilder.control(this.recipe ? this.recipe.description : '', Validators.required),
+        category: this.formBuilder.control(this.recipe ? this.recipe.category : ''),
+        link: this.formBuilder.control(this.recipe ? this.recipe.link : ''),
         steps: new FormArray([new FormGroup({step: new FormControl('')})])
       }
     );
@@ -71,7 +66,6 @@ export class RecipeComponent implements OnInit {
     this.recipe.description = this.form.get('description').value;
     this.recipe.title = this.form.get('title').value;
     this.service.updateUsingPUT2(this.recipe)
-      // .subscribe(note => this.note = note)
       .subscribe(note => this.router.navigate(['/recipes']));
   }
 
@@ -85,19 +79,6 @@ export class RecipeComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/recipes']);
-  }
-
-  dropped(event: UploadEvent) {
-    this.file = event.files[0];
-    this.uploadedFile = true;
-    const fileEntry = this.file.fileEntry as FileSystemFileEntry;
-    const reader = new FileReader();
-    fileEntry.file(file => {
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            this.imageUrl = reader.result;
-        };
-    });
   }
 
 }

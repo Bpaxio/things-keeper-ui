@@ -12,6 +12,14 @@
           <a mat-button routerLink="/linkmarks" routerLinkActive="active" class="middle-nav-link">Ссылки</a>
         </li>
       </ul>
+      <ul class="middle-nav user-nav">
+        <li *ngIf="username" class="middle-nav-link-cont">
+            <div class="middle-nav-link mat-button">Добро пожаловать, {{ username }}</div>
+        </li>
+        <li class="middle-nav-link-cont">
+           <a mat-button (click)="logout()" class="middle-nav-link">Выйти</a>
+        </li>
+      </ul>
     </nav>
   </mat-toolbar>
 </div>
